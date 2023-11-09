@@ -10,7 +10,6 @@ switch (process.env.NODE_ENV) {
   case 'development':
     Object.assign(dbConfig, {
       type: 'mongodb',
-
       logging: true,
       entities: ['**/*.entity.js'],
     });
@@ -18,7 +17,6 @@ switch (process.env.NODE_ENV) {
   case 'test':
     Object.assign(dbConfig, {
       type: 'mongodb',
-
       logging: true,
       entities: ['**/*.entity.js'],
     });
@@ -26,7 +24,6 @@ switch (process.env.NODE_ENV) {
   case 'production':
     Object.assign(dbConfig, {
       type: 'mongodb',
-
       logging: true,
       entities: ['**/*.entity.js'],
     });
