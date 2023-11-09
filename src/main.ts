@@ -11,6 +11,10 @@ async function bootstrap() {
       secret: process.env.COOKIE_KEY,
       resave: false,
       saveUninitialized: false,
+      cookie: {
+        sameSite: 'none',
+        secure: true,
+      },
     }),
   );
 
