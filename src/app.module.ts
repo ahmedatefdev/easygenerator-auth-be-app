@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Module, ValidationPipe } from '@nestjs/common';
+import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { AppLoggerMiddleware } from './users/middlewares/appLoggerMiddleware';
 
 const ormconfig = require('../ormconfig.js');
 
@@ -20,6 +21,7 @@ const ormconfig = require('../ormconfig.js');
       url: process.env.DB_URL,
     }),
     UsersModule,
+    // AuthModule,
   ],
   controllers: [AppController],
   providers: [
@@ -32,4 +34,8 @@ const ormconfig = require('../ormconfig.js');
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  }
+}
