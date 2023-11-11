@@ -3,11 +3,14 @@ import { AppModule } from './app.module';
 import { NextFunction, Response } from 'express';
 import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['log', 'fatal', 'error', 'warn', 'debug', 'verbose'],
   });
+
+  app.use(helmet());
   app.use(cookieParser());
 
   app.enableCors({
